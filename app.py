@@ -192,17 +192,19 @@ def load_vocabulary():
 
 
 @st.cache_resource
-def load_models():
+def load_models(vocab):
     """Load trained encoder and decoder models"""
     try:
         # Load checkpoint
         checkpoint = torch.load('best_model (2).pth', map_location=torch.device('cpu'))
 
-        # Get hyperparameters
+        # Get hyperparameters from checkpoint or use defaults from training
         embed_size = checkpoint.get('embed_size', 256)
         hidden_size = checkpoint.get('hidden_size', 512)
-        vocab_size = checkpoint['vocab_size']
         num_layers = checkpoint.get('num_layers', 2)
+
+        # Get vocab_size from loaded vocabulary
+        vocab_size = len(vocab)
 
         # Reconstruct encoder
         encoder = Encoder(feature_size=2048, hidden_size=hidden_size)
@@ -366,7 +368,7 @@ def main():
     st.sidebar.header("📦 Model Status")
     with st.spinner("Loading models..."):
         vocab = load_vocabulary()
-        encoder, decoder, checkpoint = load_models()
+        encoder, decoder, checkpoint = load_models(vocab)
         resnet_model = load_resnet()
 
     # Main content
