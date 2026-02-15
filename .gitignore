@@ -1,0 +1,22 @@
+# Model weights and large binary files
+*.pth
+*.pkl
+*.h5
+*.onnx
+
+# Python cache and environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Streamlit/IDE configs
+.streamlit/config.toml
+.vscode/
+.idea/
+
+# Images (optional, keep loss_curve.png if you want it on your README)
+# *.png
+# *.jpg
