@@ -192,9 +192,14 @@ def load_vocabulary():
 
 
 @st.cache_resource
-def load_models(vocab):
+def load_models():
     """Load trained encoder and decoder models"""
     try:
+        # Load vocabulary to get vocab_size
+        with open('vocabulary.pkl', 'rb') as f:
+            vocab = pickle.load(f)
+        vocab_size = len(vocab)
+
         # Load checkpoint
         checkpoint = torch.load('best_model (2).pth', map_location=torch.device('cpu'))
 
@@ -202,9 +207,6 @@ def load_models(vocab):
         embed_size = checkpoint.get('embed_size', 256)
         hidden_size = checkpoint.get('hidden_size', 512)
         num_layers = checkpoint.get('num_layers', 2)
-
-        # Get vocab_size from loaded vocabulary
-        vocab_size = len(vocab)
 
         # Reconstruct encoder
         encoder = Encoder(feature_size=2048, hidden_size=hidden_size)
@@ -368,7 +370,7 @@ def main():
     st.sidebar.header("📦 Model Status")
     with st.spinner("Loading models..."):
         vocab = load_vocabulary()
-        encoder, decoder, checkpoint = load_models(vocab)
+        encoder, decoder, checkpoint = load_models()
         resnet_model = load_resnet()
 
     # Main content
