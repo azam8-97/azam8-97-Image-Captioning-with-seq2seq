@@ -6,7 +6,7 @@
 
 # Specific large files to exclude
 flickr30k_features.pkl
-best_model.pth
+best_model (2).pth
 
 # Python cache and environments
 __pycache__/

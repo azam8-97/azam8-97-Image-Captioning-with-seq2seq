@@ -196,7 +196,7 @@ def load_models():
     """Load trained encoder and decoder models"""
     try:
         # Load checkpoint
-        checkpoint = torch.load('best_model.pth', map_location=torch.device('cpu'))
+        checkpoint = torch.load('best_model (2).pth', map_location=torch.device('cpu'))
 
         # Get hyperparameters
         embed_size = checkpoint.get('embed_size', 256)
@@ -234,7 +234,7 @@ def load_models():
         return encoder, decoder, checkpoint
 
     except FileNotFoundError:
-        st.error("❌ best_model.pth not found! Please upload it to the app directory.")
+        st.error("❌ best_model (2).pth not found! Please upload it to the app directory.")
         st.stop()
     except Exception as e:
         st.error(f"❌ Error loading models: {e}")
