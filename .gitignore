@@ -4,6 +4,11 @@
 *.h5
 *.onnx
 
+# Specific large files to exclude
+flickr30k_features.pkl
+caption_model.pth
+best_model*.pth
+
 # Python cache and environments
 __pycache__/
 *.py[cod]
